@@ -78,16 +78,18 @@ USE_DEVICE_SPECIFIC_GPS := true
 TARGET_NO_RPC := true
 
 # Kernel
+TARGET_PREBUILT_KERNEL := device/huawei/HWPIC/kernel
 BOARD_KERNEL_BASE := 0x00078000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE := loglevel=4 initcall_debug=n page_tracker=on slub_min_objects=16 androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x07b88000 --tags_offset 0x07988000
-TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_KERNEL_HEADER_ARCH := arm64
+TARGET_USES_UNCOMPRESSED_KERNEL := true
+#TARGET_KERNEL_ARCH := arm64
+#TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+#TARGET_KERNEL_HEADER_ARCH := arm64
 
-TARGET_KERNEL_SOURCE := kernel/huawei/HWPIC
-TARGET_KERNEL_CONFIG := hisi_6250_defconfig
+#TARGET_KERNEL_SOURCE := kernel/huawei/HWPIC
+#TARGET_KERNEL_CONFIG := hisi_6250_defconfig
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
