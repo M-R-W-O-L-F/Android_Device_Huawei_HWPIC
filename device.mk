@@ -83,22 +83,26 @@ PRODUCT_COPY_FILES += \
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.hi6250 \
-    fstab.zram768m \
+    fstab.zram512m \
     fstab.zram1024m \
     fstab.zram1536m \
     init.charger.rc \
     init.chip.charger.rc \
     init.chip.usb.rc \
     init.hi6250.gps.rc \
+    init.hi6250.power.rc \
     init.hi6250.rc \
-    init.usb.configfs.rc \
-    init.usb.rc \
+    init.hi6250.usb.configfs.rc \
+    init.hi6250.usb.rc \
     ueventd.hi6250.rc
 
 PRODUCT_PACKAGES += \
     hw_service
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    ro.adb.secure=0 \
+    ro.secure=0 \
+    ro.debuggable=0 \
     ro.magic.api.version=0.1 \
     ro.enable_boot_charger_mode=0 \
     persist.sys.usb.config=manufacture,adb \
@@ -114,8 +118,8 @@ PRODUCT_PACKAGES += \
     Snap
 
 # Doze
-PRODUCT_PACKAGES += \
-    HisiDoze
+#PRODUCT_PACKAGES += \
+#    HisiDoze
 
 PRODUCT_PACKAGES += \
     libxml2
@@ -128,10 +132,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     Tag
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilts/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
-    $(LOCAL_PATH)/prebuilts/libnfc-nxp.conf:system/etc/libnfc-nxp.conf
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \

@@ -78,18 +78,16 @@ USE_DEVICE_SPECIFIC_GPS := true
 TARGET_NO_RPC := true
 
 # Kernel
-TARGET_PREBUILT_KERNEL := device/huawei/HWPIC/kernel
 BOARD_KERNEL_BASE := 0x00078000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE := loglevel=4 initcall_debug=n page_tracker=on slub_min_objects=16 androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x07b88000 --tags_offset 0x07988000
-TARGET_USES_UNCOMPRESSED_KERNEL := true
-#TARGET_KERNEL_ARCH := arm64
-#TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-#TARGET_KERNEL_HEADER_ARCH := arm64
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+TARGET_KERNEL_HEADER_ARCH := arm64
 
-#TARGET_KERNEL_SOURCE := kernel/huawei/HWPIC
-#TARGET_KERNEL_CONFIG := hisi_6250_defconfig
+TARGET_KERNEL_SOURCE := kernel/huawei/HWPIC
+TARGET_KERNEL_CONFIG := hisi_6250_defconfig
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
@@ -124,9 +122,9 @@ BOARD_NEEDS_VENDORIMAGE_SYMLINK := true
 TARGET_COPY_OUT_VENDOR := system
 
 # Vendor Init
-TARGET_UNIFIED_DEVICE := true
-TARGET_INIT_VENDOR_LIB := libinit_hi6250
-TARGET_LIBINIT_DEFINES_FILE := $(LOCAL_PATH)/init/init_hi6250.cpp
+#TARGET_UNIFIED_DEVICE := true
+#TARGET_INIT_VENDOR_LIB := libinit_hi6250
+#TARGET_LIBINIT_DEFINES_FILE := $(LOCAL_PATH)/init/init_hi6250.cpp
 
 # Sepolicy
 BOARD_SEPOLICY_DIRS += \
@@ -142,9 +140,9 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd
 WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/bcmdhd/parameters/firmware_path"
-WIFI_DRIVER_FW_PATH_STA          := "/vendor/firmware/fw_bcm43455_hw.bin"
-WIFI_DRIVER_FW_PATH_AP           := "/vendor/firmware/fw_bcm43455_apsta_hw.bin"
-WIFI_DRIVER_FW_PATH_P2P          := "/vendor/firmware/fw_bcm43455_hw.bin"
+WIFI_DRIVER_FW_PATH_STA          := "/huawei/HWPIC/proprietary/system/vendor/firmware/fw_bcm43455_hw.bin"
+WIFI_DRIVER_FW_PATH_AP           := "/huawei/HWPIC/proprietary/system/vendor/firmware/fw_bcm43455_apsta_hw.bin"
+WIFI_DRIVER_FW_PATH_P2P          := "/huawei/HWPIC/proprietary/system/vendor/firmware/fw_bcm43455_hw.bin"
 WIFI_BAND                        := 802_11_ABG
 
 # inherit from the proprietary version

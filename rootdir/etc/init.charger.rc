@@ -1,5 +1,5 @@
-import /init.usb.rc
-import /init.usb.configfs.rc
+import /init.hi6250.usb.rc
+import /init.hi6250.usb.configfs.rc
 import /init.chip.charger.rc
 
 on early-init
