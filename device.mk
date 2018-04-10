@@ -119,10 +119,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Snap
 
-# Doze
-#PRODUCT_PACKAGES += \
-#    HisiDoze
-
 PRODUCT_PACKAGES += \
     libxml2
 
