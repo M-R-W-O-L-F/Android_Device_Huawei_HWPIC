@@ -99,10 +99,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     hw_service
 
+#ADDITIONAL_DEFAULT_PROPERTIES
+#    ro.adb.secure=0 \
+#    ro.secure=0 \
+#    ro.debuggable=0
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.adb.secure=0 \
-    ro.secure=0 \
-    ro.debuggable=0 \
     ro.magic.api.version=0.1 \
     ro.enable_boot_charger_mode=0 \
     persist.sys.usb.config=manufacture,adb \
