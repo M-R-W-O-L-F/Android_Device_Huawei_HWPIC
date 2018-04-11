@@ -99,7 +99,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     hw_service
 
-ADDITIONAL_DEFAULT_PROPERTIES
+ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.adb.secure=0 \
     ro.secure=0 \
     ro.debuggable=0
