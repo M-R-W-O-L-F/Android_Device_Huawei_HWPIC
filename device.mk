@@ -89,12 +89,15 @@ PRODUCT_PACKAGES += \
     init.charger.rc \
     init.chip.charger.rc \
     init.chip.usb.rc \
-    init.hi6250.gps.rc \
     init.hi6250.power.rc \
     init.hi6250.rc \
     init.hi6250.usb.configfs.rc \
     init.hi6250.usb.rc \
     ueventd.hi6250.rc
+    
+# LIBShim
+PRODUCT_PACKAGES += \
+    libshim_stagefright
 
 PRODUCT_PACKAGES += \
     hw_service
@@ -125,11 +128,6 @@ PRODUCT_PACKAGES += \
 # USB
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
-
-# NFC
-PRODUCT_PACKAGES += \
-    com.android.nfc_extras \
-    Tag
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
