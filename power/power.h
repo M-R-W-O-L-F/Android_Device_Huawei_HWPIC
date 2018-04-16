@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "HI3660 PowerHAL"
+#define LOG_TAG "HI6250 PowerHAL"
 
 #define STATE_ON "state=1"
 
