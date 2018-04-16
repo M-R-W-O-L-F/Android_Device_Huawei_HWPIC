@@ -320,8 +320,8 @@ struct power_module HAL_MODULE_INFO_SYM = {
         .module_api_version = POWER_MODULE_API_VERSION_0_3,
         .hal_api_version = HARDWARE_HAL_API_VERSION,
         .id = POWER_HARDWARE_MODULE_ID,
-        .name = "HI3650 Power HAL",
-        .author = "Surdu Petru",
+        .name = "HI6250 Power HAL",
+        .author = "MR.WOLF",
         .methods = &power_module_methods,
     },
 
