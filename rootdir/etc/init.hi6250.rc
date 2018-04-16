@@ -1,16 +1,12 @@
-import /init.hi3660.gps.rc
-import /init.hi3660.power.rc
-import /init.hi3660.usb.configfs.rc
-import /init.hi3660.usb.rc
+import /init.hi6250.power.rc
+import /init.hi6250.usb.configfs.rc
+import /init.hi6250.usb.rc
 
 on early-init
     setprop persist.service.hdb.enable true
 
 on init
     start hw_service
-
-    # NFC
-    symlink /dev/pn544 /dev/pn54x
 
     mkdir /cust
     mkdir /vendor
@@ -186,16 +182,16 @@ on init
     chown root system /sys/kernel/virt_to_phys
     chmod 0660 /sys/kernel/virt_to_phys
 
-	chmod 0750 /sys/kernel/mntn/
-	chmod 0750 /sys/kernel/mntn/switch/
-	chmod 0660 /sys/kernel/mntn/switch/irq
-	chmod 0660 /sys/kernel/mntn/switch/task
-	chmod 0660 /sys/kernel/mntn/switch/cpuidle
-	chmod 0660 /sys/kernel/mntn/switch/cpuonoff
-	chmod 0660 /sys/kernel/mntn/switch/syscall
-	chmod 0660 /sys/kernel/mntn/switch/hungtask
-	chmod 0660 /sys/kernel/mntn/switch/tasklet
-	chmod 0660 /sys/kernel/mntn/switch/worker
+    chmod 0750 /sys/kernel/mntn/
+    chmod 0750 /sys/kernel/mntn/switch/
+    chmod 0660 /sys/kernel/mntn/switch/irq
+    chmod 0660 /sys/kernel/mntn/switch/task
+    chmod 0660 /sys/kernel/mntn/switch/cpuidle
+    chmod 0660 /sys/kernel/mntn/switch/cpuonoff
+    chmod 0660 /sys/kernel/mntn/switch/syscall
+    chmod 0660 /sys/kernel/mntn/switch/hungtask
+    chmod 0660 /sys/kernel/mntn/switch/tasklet
+    chmod 0660 /sys/kernel/mntn/switch/worker
 
     mkdir /dev/cpuctl 0666
     mount cgroup none /dev/cpuctl cpu
@@ -271,7 +267,7 @@ on init
     chmod 0664 /dev/cpuset/top-app/tasks
     chmod 0664 /dev/cpuset/tasks
 
-	    chown radio system /dev/flp
+    chown radio system /dev/flp
     chmod 0660 /dev/flp
 
     mkdir /dev/bus 0755 root root
@@ -295,10 +291,10 @@ on fs
     export LD_SHIM_LIBS "/system/lib64/libcutils.so|libshim_log.so:/system/lib/libcutils.so|libshim_log.so:/vendor/lib/libhwuibp.so|libshim_hwui.so:/vendor/lib64/libhwuibp.so|libshim_hwui.so:/vendor/lib/hw/audio.primary.hi3660.so|libshim_audioroute.so:/vendor/lib64/hw/audio.primary.hi3660.so|libshim_audioroute.so:/system/lib/libgux.so|libux.so:/system/lib64/libgux.so|libux.so"
 
     wait /dev/block/bootdevice/by-name
-    mount_all fstab.hi3660
+    mount_all fstab.hi6250
 
     mkdir /patch_hw 0775 system system
-	    wait /dev/block/bootdevice/by-name/patch_a
+    wait /dev/block/bootdevice/by-name/patch_a
     mount /dev/block/bootdevice/by-name/patch_a /patch_hw ro
 
     exec - root root -- /patch_hw/patch_procedure
@@ -313,7 +309,7 @@ on fs
     symlink /splash2/fac_log /data/log/fac_log
     symlink /splash2 /log
 
-	    wait /dev/block/bootdevice/by-name/modem_fw_a
+    wait /dev/block/bootdevice/by-name/modem_fw_a
     mount ext4 /dev/block/bootdevice/by-name/modem_fw_a /modem_fw ro
     chown radio radio sys/devices/platform/balong_power/state
 
@@ -321,8 +317,8 @@ on fs
     restorecon /sys/class/leds/green/brightness
     restorecon /sys/class/leds/blue/brightness
     restorecon /sys/class/leds/torch_front/brightness
-	restorecon /sys/class/leds/torch/brightness
-	    restorecon /sys/class/hw_power/charger/charge_data/enable_charger
+    restorecon /sys/class/leds/torch/brightness
+    restorecon /sys/class/hw_power/charger/charge_data/enable_charger
     restorecon /sys/class/leds/lcd_backlight0/brightness
     restorecon /sys/class/graphics/fb0/lcd_test_config
     restorecon /sys/class/graphics/fb0/amoled_pcd_errflag_check
@@ -358,7 +354,7 @@ on fs
     restorecon /sys/class/graphics/fb0/lcd_cabc_mode
     restorecon /sys/class/leds/torch/flash_thermal_protect
 	
-	on post-fs
+on post-fs
     start thermshex
 
     chown system system /proc/uid_cputime/show_uid_stat
@@ -420,7 +416,7 @@ on post-fs-data
     chown system camera /data/img
     chmod 770 /data/img
 
-	    mkdir /data/ioloader
+    mkdir /data/ioloader
     chown root system /data/ioloader
     chmod 670 /data/ioloader
 
@@ -835,35 +831,6 @@ on boot
     chown root system /proc/hi64xxdbg/hi64xxdebug
     chmod 0660 /proc/hi64xxdbg/hi64xxdebug	
 
-    chown nfc nfc /sys/nfc/nfc_fwupdate
-    chmod 0664 /sys/nfc/nfc_fwupdate
-    chown nfc nfc /sys/nfc/nxp_config_name
-    chmod 0664 /sys/nfc/nxp_config_name
-    chown nfc nfc /sys/nfc/nfc_brcm_conf_name
-    chmod 0664 /sys/nfc/nfc_brcm_conf_name
-    chown nfc nfc /sys/nfc/nfc_sim_switch
-    chmod 0664 /sys/nfc/nfc_sim_switch
-    chown nfc nfc /sys/nfc/nfc_sim_status
-    chmod 0444 /sys/nfc/nfc_sim_status
-    chown nfc nfc /sys/nfc/rd_nfc_sim_status
-    chmod 0444 /sys/nfc/rd_nfc_sim_status
-    chown nfc nfc /sys/nfc/nfc_enable_status
-    chmod 0664 /sys/nfc/nfc_enable_status
-    chown nfc nfc /sys/nfc/nfc_card_num
-    chmod 0444 /sys/nfc/nfc_card_num
-    chown nfc nfc /sys/nfc/nfc_chip_type
-    chmod 0444 /sys/nfc/nfc_chip_type
-    chown nfc nfc /sys/nfc/nfc_fw_version
-    chmod 0444 /sys/nfc/nfc_fw_version
-    chown nfc nfc /sys/nfc/nfcservice_lock
-    chmod 0664 /sys/nfc/nfcservice_lock
-    chown nfc nfc /sys/nfc/nfc_svdd_sw
-    chmod 0664 /sys/nfc/nfc_svdd_sw
-    chown nfc nfc /sys/nfc/nfc_close_type
-    chmod 0664 /sys/nfc/nfc_close_type
-    chown nfc nfc /sys/nfc/nfc_single_channel
-    chmod 0444 /sys/nfc/nfc_single_channel
-
     chown system system /sys/class/irda/irda_chip/ir_chip_type
 
     chown system system /sys/class/voltage/voltage/vol_enable
@@ -1051,23 +1018,6 @@ on boot
     chown system system /sys/class/hall/hall/report_count
     chown system system /sys/class/hall/hall/value
 
-    chown nfc nfc /sys/nfc/nfc_wired_ese_type
-    chmod 0444 /sys/nfc/nfc_wired_ese_type
-    chown nfc nfc /sys/nfc/nfc_activated_se_info
-    chmod 0664 /sys/nfc/nfc_activated_se_info
-    chown nfc nfc /sys/nfc/nfc_hal_dmd
-    chmod 0664 /sys/nfc/nfc_hal_dmd
-    chown nfc nfc /sys/nfc/nfc_calibration
-    chmod 0444 /sys/nfc/nfc_calibration
-    chown nfc system /sys/devices/platform/0.hisee/hisee_power
-    chmod 0660 /sys/devices/platform/0.hisee/hisee_power
-    chown nfc nfc /sys/devices/platform/0.hisee/hisee_apdu
-    chmod 0660 /sys/devices/platform/0.hisee/hisee_apdu
-    chown nfc system /sys/devices/platform/0.hisee/hisee_check_ready
-    chmod 0440 /sys/devices/platform/0.hisee/hisee_check_ready
-    chown nfc nfc /sys/devices/platform/0.hisee/hisee_has_new_cos
-    chmod 0440 /sys/devices/platform/0.hisee/hisee_has_new_cos
-
     chmod 660 /proc/hifidsp/hifi
     chown root audio /proc/hifidsp/hifi
     chmod 660 /proc/hifidsp/hifi_pcm_read
@@ -1186,13 +1136,13 @@ service hw_service /sbin/hw_service
     disabled
     seclabel u:r:recovery:s0
 
-service HwCamCfgSvr /vendor/bin/HwCamCfgSvr hi3660 STF
+service HwCamCfgSvr /vendor/bin/HwCamCfgSvr hi6250 HWPIC
     class main
     user media
     group audio camera inet net_bt net_bt_admin net_bw_acct wakelock system
     writepid /dev/cpuset/system-background/tasks /dev/stune/system-background/tasks
 
-service HwServiceHost /system/bin/HwServiceHost hi3660 STF
+service HwServiceHost /system/bin/HwServiceHost hi6250 HWPIC
     class main
     user cameraserver
     group audio camera inet net_bt net_bt_admin net_bw_acct wakelock system
