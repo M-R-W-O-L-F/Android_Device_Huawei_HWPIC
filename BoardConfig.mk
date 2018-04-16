@@ -32,7 +32,7 @@ ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := hi6250,picasso,Nova 2,HWPIC,PIC-LX9,PIC-L29,PIC-L09,PIC-AL00,PIC-TL00
+TARGET_OTA_ASSERT_DEVICE := hi6250,picasso,Nova 2,HWPIC,PIC-LX9,PIC-L29,PIC-L09,PIC-AL00,pic_al00,PIC-TL00
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
@@ -102,6 +102,15 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 55113154560
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_FLASH_BLOCK_SIZE := 131072
 
+# Init
+TARGET_INIT_VENDOR_LIB := libhuawei_init
+
+HWPIC_SHIMS := '/hwvendor/lib64/hwcam/hwcam.hi6250.m.HWPIC.so|libshim_libui.so:/hwvendor/lib64/hwcam/hwcam.hi6250.m.HWPIC.so|libshim.so'
+COMMON_SHIMS := '/hwvendor/lib/hw/audio.primary.hisi.so|libshim.so:/hwvendor/lib64/libcamera_algo.so|libshim_libui.so:/hwvendor/lib64/hw/fingerprint.hi6250.so|libshim.so'
+
+# Linker
+LD_SHIM_LIBS := $(COMMON_SHIMS):$(HWPIC_SHIMS)
+
 # Properties
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 
@@ -120,6 +129,11 @@ ENABLE_WEBGL := true
 # Vendor
 BOARD_NEEDS_VENDORIMAGE_SYMLINK := true
 TARGET_COPY_OUT_VENDOR := system
+
+# Vendor Init
+TARGET_UNIFIED_DEVICE := true
+TARGET_INIT_VENDOR_LIB := libinit_hi6250
+TARGET_LIBINIT_DEFINES_FILE := $(LOCAL_PATH)/init/init_HWPIC.cpp
 
 # Sepolicy
 BOARD_SEPOLICY_DIRS += \
