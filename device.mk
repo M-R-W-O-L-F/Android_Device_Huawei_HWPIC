@@ -3,6 +3,16 @@ $(call inherit-product-if-exists, vendor/huawei/HWPIC/HWPIC-vendor.mk)
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
+# Recovery ramdisk, libraries and modules.
+PRODUCT_COPY_FILES += \
+        $(LOCAL_PATH)/rootdir/init.recovery.balong_modem.rc:root/init.recovery.balong_modem.rc \
+        $(LOCAL_PATH)/rootdir/init.recovery.huawei.rc:root/init.recovery.huawei.rc \
+        $(LOCAL_PATH)/rootdir/init.recovery.hisi.rc:root/init.recovery.hisi.rc \
+        $(LOCAL_PATH)/recovery/init.recovery.hi6250.rc:root/init.recovery.hi6250.rc \
+        $(LOCAL_PATH)/recovery/init.recovery.hi6250.usb.rc:root/init.recovery.hi6250.usb.rc \
+        $(LOCAL_PATH)/recovery/init.recovery.meticulus.rc:root/init.recovery.meticulus.rc \
+        $(LOCAL_PATH)/recovery/init.recovery.usb.rc:root/init.recovery.usb.rc
+
 # Media configuration
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilts/media_codecs.xml:system/etc/media_codecs.xml \
@@ -86,6 +96,11 @@ PRODUCT_PACKAGES += \
     fstab.zram512m \
     fstab.zram1024m \
     fstab.zram1536m \
+    hwcomposer.hi6250 \
+    libcopybit_wrapper \
+    lights.hi6250 \
+    metiotgd \
+    emui5_vendor_symlinks \
     init.charger.rc \
     init.chip.charger.rc \
     init.chip.usb.rc \
@@ -97,7 +112,8 @@ PRODUCT_PACKAGES += \
     
 # LIBShim
 PRODUCT_PACKAGES += \
-    libshim_stagefright
+    libshim_stagefright \
+    libshim
 
 PRODUCT_PACKAGES += \
     hw_service
@@ -142,3 +158,10 @@ PRODUCT_PACKAGES += \
     hostapd \
     wpa_supplicant \
     wpa_supplicant.conf
+    
+# Non-device-specific props
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.com.google.locationfeatures=1 \
+    ro.setupwizard.mode=OPTIONAL \
+    ro.setupwizard.enable_bypass=1 \
+    ro.config.sync=yes
