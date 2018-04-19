@@ -136,7 +136,7 @@ ro.config.is_start_commril=true
 wifi.interface=wlan0
 
 #
-# Meticulus Lights HAL
+# MR.WOLF Lights HAL
 #
 # lp(low power) battery below 25%
 # c (charging) battery above 25% below 90%
@@ -156,7 +156,7 @@ persist.sys.lights_HAL_c=0xffffff00
 persist.sys.lights_HAL_fp=0xff00ff00
 persist.sys.lights_HAL_n=0xff0000ff
 #
-# Meticulus Power HAL
+# MR.WOLF Power HAL
 #
 persist.sys.stock_power_HAL=false
 #
