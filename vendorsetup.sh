@@ -1,1 +1,2 @@
+add_lunch_combo lineage_HWPIC-user
 add_lunch_combo lineage_HWPIC-userdebug
